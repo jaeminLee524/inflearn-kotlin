@@ -1,5 +1,13 @@
 package com.group.libraryapp.calculator
 
+/**
+ * 수동으로 만든 테스트 코드의 경우 여러 단점이 존재한다.
+ * 1. main 메소드에 수동으로 테스트 메소드를 추가해야한다.
+ * 2. 테스트 메소드를 개별적으로 실행하기 어렵다.
+ * 3. 기대값과 실제 결과값에 대한 정보를 제공해주지 않는다.
+ * 4. 예외를 직전 던지거나, try catch을 사용해 직접 구현해야한다.
+ * 5. 공통적으로 처리해야 할 기능이 있다면 메소드 마다 중복이 생긴다 -> given 절 참고
+ */
 fun main() {
     val calculatorTest = CalculatorTest()
 
