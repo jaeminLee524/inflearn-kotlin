@@ -13,8 +13,6 @@ l
 <src/test/kotlin/com/group/libraryapp/calculator/JunitTest.kt,9/5/95a3634d048448a5913c1267c15f21de90733430
 v
 Fsrc/test/kotlin/com/group/libraryapp/calculator/JunitCalculatorTest.kt,f/1/f10f4e686fdc2b8cdb621848c7240dcf27bbf3b7
-p
-@src/main/java/com/group/libraryapp/service/user/UserService.java,1/6/16855b605ec06fc203113247571d3282b612f54b
 z
 Jsrc/main/java/com/group/libraryapp/dto/user/request/UserCreateRequest.java,a/6/a641979f548b9ae8906857cf67ac91eab72344c5
 t
@@ -23,8 +21,6 @@ v
 Fsrc/main/java/com/group/libraryapp/controller/user/UserController.java,0/b/0b98a6aa905dc4fa3f632faba0caadfe9cab678d
 z
 Jsrc/main/java/com/group/libraryapp/dto/user/request/UserUpdateRequest.java,8/f/8f49bd4e5b5906feffb514133521230e216b3133
-p
-@src/main/java/com/group/libraryapp/service/book/BookService.java,b/a/bab4acfa7cff59d8f84f6ccdae476a4ca04e2c7b
 t
 Dsrc/main/java/com/group/libraryapp/dto/book/request/BookRequest.java,7/0/70e0db702810a31096f775f70ea62c0c062ee3e9
 x
@@ -49,3 +45,9 @@ Bsrc/main/kotlin/com/group/libraryapp/domain/user/UserRepository.kt,f/4/f48b094
 Ysrc/main/kotlin/com/group/libraryapp/domain/user/loanhistory/UserLoanHistoryRepository.kt,a/a/aac120e83d57d866f76ce6d2cde95d58317465c2
 p
 @src/main/kotlin/com/group/libraryapp/service/user/UserService.kt,2/f/2fd96853f2d8348128aacedb747033d926f5a614
+v
+Fsrc/main/java/com/group/libraryapp/controller/book/BookController.java,d/4/d4116185121c422519e507d013575c02067b7dc7
+p
+@src/main/kotlin/com/group/libraryapp/service/book/BookService.kt,f/6/f6fe117d521167a8c56c11cd4b79e50b2040013d
+k
+;src/main/kotlin/com/group/libraryapp/util/ExceptionUtils.kt,e/6/e6966f62773a82dbc7ddc3fdbc29a76a6a9deea2
