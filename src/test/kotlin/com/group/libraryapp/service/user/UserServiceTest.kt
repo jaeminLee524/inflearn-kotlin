@@ -1,12 +1,18 @@
 package com.group.libraryapp.service.user
 
+import com.group.libraryapp.domain.book.BookRepository
 import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
+import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory
+import com.group.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository
+import com.group.libraryapp.domain.user.loanhistory.UserLoanStatus
 import com.group.libraryapp.dto.user.request.UserCreateRequest
 import com.group.libraryapp.dto.user.request.UserUpdateRequest
+import org.aspectj.lang.annotation.After
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.tuple
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,11 +22,12 @@ import org.springframework.boot.test.context.SpringBootTest
 class UserServiceTest @Autowired constructor(
     private val userService: UserService,
     private val userRepository: UserRepository,
+    private val userLoanRepository: UserLoanHistoryRepository,
 ) {
 
     @AfterEach
     fun tearDown() {
-        userRepository.deleteAllInBatch()
+        userRepository.deleteAll()
     }
 
     @DisplayName("유저 정보를 저장할 수 있다.")
@@ -87,5 +94,48 @@ class UserServiceTest @Autowired constructor(
 
         // then
         assertThat( userRepository.findAll()).isEmpty()
+    }
+
+    @DisplayName("대출 기록이 없는 유저도 응답에 포함된다.")
+    @Test
+    fun getUserLoanHistoriesTest1() {
+        // given
+        userRepository.save(User("A", null))
+
+        // when
+        val results = userService.getUserLoanHistory()
+
+        // then
+        assertThat(results).hasSize(1)
+        assertThat(results[0].name).isEqualTo("A")
+        assertThat(results[0].books).isEmpty()
+    }
+
+    @DisplayName("대출 기록이 많은 유저의 응답이 정상 동작한다.")
+    @Test
+    fun getUserLoanHistoriesTest2() {
+        // given
+        val savedUser = userRepository.save(User("A", null))
+        userLoanRepository.saveAll(
+            listOf(
+                UserLoanHistory.fixture(savedUser, "책1", UserLoanStatus.LOANED),
+                UserLoanHistory.fixture(savedUser, "책2", UserLoanStatus.LOANED),
+                UserLoanHistory.fixture(savedUser, "책3", UserLoanStatus.RETURNED),
+            )
+        )
+
+        // when
+        val results = userService.getUserLoanHistory()
+
+        // then
+        assertThat(results).hasSize(1)
+        assertThat(results[0].name).isEqualTo("A")
+        assertThat(results[0].books).hasSize(3)
+            .extracting("name", "isReturn")
+            .containsExactlyInAnyOrder(
+                tuple("책1", false),
+                tuple("책2", false),
+                tuple("책3", true)
+            )
     }
 }

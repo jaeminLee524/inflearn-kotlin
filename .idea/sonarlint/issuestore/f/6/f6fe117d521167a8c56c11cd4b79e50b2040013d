@@ -1,2 +1,2 @@
 
-Μkotlin:S6532"¬Replace this if expression with require(userLoanHistoryRepository.findByBookNameAndIsReturn(request.bookName, false) == null) { "μ§„μ‘ λ€μ¶λμ–΄ μλ” μ±…μ…λ‹λ‹¤" }.(εμε8‘λ‘³1
+ίkotlin:S6532"ΊReplace this if expression with require(userLoanHistoryRepository.findByBookNameAndStatus(request.bookName, UserLoanStatus.LOANED) == null) { "μ§„μ‘ λ€μ¶λμ–΄ μλ” μ±…μ…λ‹λ‹¤" }.(Υ¬Ϊÿÿÿÿÿ8‘λ‘³1
