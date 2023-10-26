@@ -11,6 +11,7 @@ import com.group.libraryapp.domain.user.loanhistory.UserLoanStatus
 import com.group.libraryapp.dto.book.request.BookLoanRequest
 import com.group.libraryapp.dto.book.request.BookRequest
 import com.group.libraryapp.dto.book.request.BookReturnRequest
+import com.group.libraryapp.dto.book.response.BookStatResponse
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.AfterEach
@@ -122,5 +123,30 @@ class BookServiceTest @Autowired constructor(
 
         // then
         assertThat(results).isEqualTo(1)
+    }
+
+    @DisplayName("분야별 책 권수를 정상 확인한다.")
+    @Test
+    fun getBookStatistics() {
+        // given
+        bookRepository.saveAll(
+            listOf(
+                Book("A", BookType.COMPUTER),
+                Book("B", BookType.COMPUTER),
+                Book("C", BookType.SCIENCE),
+            )
+        )
+
+        // when
+        val results = bookService.getBookStatistics()
+
+        // then
+        assertThat(results).hasSize(2)
+        assertCount(results, BookType.COMPUTER, 2)
+        assertCount(results, BookType.SCIENCE, 1)
+    }
+
+    private fun assertCount(results: List<BookStatResponse>, type: BookType, count: Int) {
+        assertThat( results.first { dto -> dto.type == type }.count).isEqualTo(count)
     }
 }
