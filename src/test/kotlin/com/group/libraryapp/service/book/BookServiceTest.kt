@@ -12,6 +12,7 @@ import com.group.libraryapp.dto.book.request.BookLoanRequest
 import com.group.libraryapp.dto.book.request.BookRequest
 import com.group.libraryapp.dto.book.request.BookReturnRequest
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -101,5 +102,25 @@ class BookServiceTest @Autowired constructor(
         val result = userLoanHistoryRepository.findAll()
         assertThat(result).hasSize(1)
         assertThat(result[0].status).isEqualTo(UserLoanStatus.RETURNED)
+    }
+
+    @DisplayName("책 대여 권수를 정상 확인한다.")
+    @Test
+    fun countLoanBook() {
+        // given
+        val savedUser = userRepository.save(User("이재민", null))
+        userLoanHistoryRepository.saveAll(
+            listOf(
+                UserLoanHistory.fixture(savedUser, "A"),
+                UserLoanHistory.fixture(savedUser, "B", UserLoanStatus.RETURNED),
+                UserLoanHistory.fixture(savedUser, "B", UserLoanStatus.RETURNED),
+            )
+        )
+
+        // when
+        val results = bookService.countLoanBook()
+
+        // then
+        assertThat(results).isEqualTo(1)
     }
 }

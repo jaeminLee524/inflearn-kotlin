@@ -9,5 +9,4 @@ import java.util.Optional
 interface BookRepository: JpaRepository<Book, Long> {
 
     fun findByName(bookName: String): Book?
-    fun findAllByStatus(loaned: UserLoanStatus): List<UserLoanHistory>
 }
