@@ -59,3 +59,5 @@ l
 Nsrc/main/kotlin/com/group/libraryapp/domain/user/loanhistory/UserLoanStatus.kt,5/3/5391ce9ba558388d4b3e05dc3fa008d42f07f703
 Å
 Qsrc/main/kotlin/com/group/libraryapp/dto/user/response/UserLoanHistoryResponse.kt,6/6/66c8f56088f7418dbeca67236dcf5e10f4b0f19a
+z
+Jsrc/main/kotlin/com/group/libraryapp/dto/book/response/BookStatResponse.kt,0/6/06689b447754dbe299cb32c93c9f9ad38e1a3349
